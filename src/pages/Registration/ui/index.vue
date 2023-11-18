@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { push } from 'vue-router';
 import InputText from 'primevue/inputtext';
 import logo from '../../../shared/assets/icons/logo.svg';
 
@@ -15,25 +16,25 @@ const confirmPassword = ref('');
     >
       <h1 class="text-[32px] text-[#fff]">Регистрация</h1>
       <img :src="logo" alt="" />
-      <div class="w-full">
-        <InputText
-          class="w-full mb-[24px]"
-          placeholder="Логин"
-          v-model="login"
-        />
-        <InputText
-          class="w-full mb-[24px]"
-          placeholder="Пароль"
-          v-model="password"
-        />
+      <div class="w-full flex flex-col gap-[24px]">
+        <InputText class="w-full" placeholder="Логин" v-model="login" />
+        <InputText class="w-full" placeholder="Пароль" v-model="password" />
         <InputText
           class="w-full"
           placeholder="Повторите пароль"
           v-model="confirmPassword"
         />
+        <div class="text-[#fff] text-[17px]">
+          Уже есть аккаунт?
+          <a
+            href="/"
+            class="text-blue font-medium text-[17px] ml-[5px] py-[4px] px-[10px] rounded-[5px] bg-[#fff]"
+            >Войти</a
+          >
+        </div>
       </div>
       <button
-        class="w-full rounded-[5px] border-[1px] border-[#fff] py-[8px] text-[#fff] text-[24px]"
+        class="w-full rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
       >
         Зарегистрироваться
       </button>

@@ -35,12 +35,12 @@ const inn = ref('');
       </div>
       <div class="w-full">
         <button
-          class="mb-[25px] w-full rounded-[5px] border-[1px] border-[#fff] py-[8px] text-[#fff] text-[24px]"
+          class="mb-[25px] w-full rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
         >
           Сохранить
         </button>
         <button
-          class="w-full rounded-[5px] border-[1px] border-red py-[8px] text-red text-[24px]"
+          class="w-full rounded-[3px] border-[2px] border-red py-[8px] text-red text-[16px] font-medium uppercase tracking-[1px]"
         >
           Отменить
         </button>
