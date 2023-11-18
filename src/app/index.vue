@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Auth } from '../pages/Auth';
+import { Registration } from '../pages/Registration';
 </script>
 
 <template>
-  <div>
-    <Auth />
-  </div>
+  <Auth />
+  <!-- <Registration /> -->
 </template>
 
 <style lang="scss">
