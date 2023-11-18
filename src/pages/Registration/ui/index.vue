@@ -1,12 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { push } from 'vue-router';
-import InputText from 'primevue/inputtext';
-import logo from '../../../shared/assets/icons/logo.svg';
+import { ref } from "vue";
+import InputText from "primevue/inputtext";
+import logo from "../../../shared/assets/icons/logo.svg";
+import { registerUser } from "../../../shared/api/services";
+import { AxiosError } from "axios";
 
-const login = ref('');
-const password = ref('');
-const confirmPassword = ref('');
+const login = ref("");
+const password = ref("");
+const confirmPassword = ref("");
+
+const handleRegister = async () => {
+  if (password === confirmPassword) {
+    try {
+      const { token, status } = await registerUser(password.value, login.value);
+
+      if (token) {
+        console.log("Успешная регистрация. JWT токен:", token);
+      } else {
+        console.error("Не удалось зарегистрироваться. Статус:", status);
+      }
+    } catch (error: any) {
+      console.error("Ошибка регистрации:", error);
+
+      if (error instanceof AxiosError && error.response) {
+        console.error("Статус ошибки:", error.response.status);
+      }
+    }
+  }
+};
 </script>
 
 <template>
@@ -40,6 +61,7 @@ const confirmPassword = ref('');
       </div>
       <button
         class="w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
+        @click="handleRegister"
       >
         Зарегистрироваться
       </button>

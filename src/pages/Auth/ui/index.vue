@@ -1,10 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import InputText from 'primevue/inputtext';
-import logo from '../../../shared/assets/icons/logo.svg';
+import { ref } from "vue";
+import InputText from "primevue/inputtext";
+import logo from "../../../shared/assets/icons/logo.svg";
+import { loginUser } from "../../../shared/api/services";
+import { AxiosError } from "axios";
 
-const login = ref('');
-const password = ref('');
+const login = ref("");
+const password = ref("");
+
+const handleLogin = async () => {
+  try {
+    const { token, status } = await loginUser("ваш-логин", "ваш-пароль");
+
+    if (token) {
+      console.log("Успешный вход. JWT токен:", token);
+    } else {
+      console.error("Не удалось войти. Статус:", status);
+    }
+  } catch (error: any) {
+    console.error("Ошибка входа:", error);
+
+    if (error instanceof AxiosError && error.response) {
+      console.error("Статус ошибки:", error.response.status);
+    }
+  }
+};
 </script>
 
 <template>
@@ -21,7 +41,12 @@ const password = ref('');
       </div>
       <div class="w-full flex flex-col gap-[24px]">
         <InputText class="w-full" placeholder="Логин" v-model="login" />
-        <InputText class="w-full" placeholder="Пароль" v-model="password" />
+        <InputText
+          class="w-full"
+          placeholder="Пароль"
+          type="password"
+          v-model="password"
+        />
         <div class="text-[#fff] text-[17px]">
           Нет аккаунта?
           <a
@@ -33,6 +58,7 @@ const password = ref('');
       </div>
       <button
         class="w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
+        @click="handleLogin"
       >
         Авторизироваться
       </button>
