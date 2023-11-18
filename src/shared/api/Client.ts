@@ -50,6 +50,6 @@ export const ApiClient = async ({
         `\nSTATUS: ${err.response.data.status}`
       );
 
-      return { data: "isError", status: err.response.data.status };
+      return { data: "isError", status: err.response.status };
     });
 };
