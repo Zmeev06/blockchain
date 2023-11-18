@@ -1,7 +1,9 @@
-import { createApp } from "vue";
+import { app } from "./app/index";
 import "./style.css";
-import App from "./App.vue";
-import PrimeVue from "primevue/config";
-import "./theme-2.css";
+// import "primevue/resources/themes/lara-light-teal/theme.css";
+// import 'primevue/resources/themes/saga-orange/theme.css'; // Выберите нужный вам темный стиль
+import './app/styles/theme.css'
 
-createApp(App).use(PrimeVue).mount("#app");
+import 'primevue/resources/primevue.min.css';
+
+app.mount("#app");
