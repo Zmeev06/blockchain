@@ -15,7 +15,12 @@ const confirmPassword = ref('');
       class="h-[80%] pt-[35px] mx-[20px] flex flex-col justify-between items-center"
     >
       <h1 class="text-[32px] text-[#fff]">Регистрация</h1>
-      <img :src="logo" alt="" />
+      <div>
+        <img :src="logo" alt="" />
+        <h2 class="text-[#fff] font-bold text-center text-[32px] mt-[10px]">
+          GWallet
+        </h2>
+      </div>
       <div class="w-full flex flex-col gap-[24px]">
         <InputText class="w-full" placeholder="Логин" v-model="login" />
         <InputText class="w-full" placeholder="Пароль" v-model="password" />
