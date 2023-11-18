@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 interface MenuProps {
   name: string;
 }
@@ -8,22 +12,29 @@ const props = defineProps<MenuProps>();
 const sections = [
   {
     label: props.name,
-    class: "py-3 px-3 border-b border-grey text-[#4b4b4b]",
+    class: 'py-3 px-3 border-b border-grey text-[#4b4b4b]',
+    action: () => {
+      console.log('ratatata');
+    },
   },
   {
     label: 'Настройки',
-    class: "py-2 px-3 hover:bg-grey text-dark",
+    class: 'py-2 px-3 hover:bg-grey text-dark',
+    action: () => router.push('/settings'),
   },
   {
     label: 'Выйти',
-    class: "py-2 px-3 hover:bg-grey text-[#FF1717]",
+    class: 'py-2 px-3 hover:bg-grey text-[#FF1717]',
+    action: () => {
+      router.push('/auth');
+    },
   },
 ];
 </script>
-<template lang="html">
+<template>
   <div class="bg-[#f6f6f6] rounded-[5px] w-[150px] flex flex-col gap-[5px]">
     <div v-for="(item, index) in sections" :key="index" :class="item.class">
-      <p>{{item.label}}</p>
+      <p @click="item.action">{{ item.label }}</p>
     </div>
   </div>
 </template>

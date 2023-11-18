@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import InlineSvg from 'vue-inline-svg';
 import InputText from 'primevue/inputtext';
+import { useRouter } from 'vue-router';
+import arrow from '../../../shared/assets/icons/arrow.svg';
+
+const router = useRouter();
 
 const login = ref('Sergey_T06');
 const publicKey = ref('a4F12_ggE$3kl_!ddsa564.fglve86tivy7buoin...');
@@ -13,7 +18,12 @@ const inn = ref('');
     <div
       class="h-full pt-[8px] pb-[34px] mx-[20px] flex flex-col justify-between items-center"
     >
-      <div>
+      <div class="relative w-full">
+        <InlineSvg
+          @click="router.push('/wallet')"
+          :src="arrow"
+          class="text-[#fff] w-[50px] h-[50px] absolute top-[10px] left-[-5px]"
+        />
         <h1 class="text-[24px] text-center text-[#fff]">Настройки</h1>
         <h3 class="text-[20px] text-center text-grey">{{ login }}</h3>
       </div>
