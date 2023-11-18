@@ -8,6 +8,7 @@ import { registerUser } from '../../../shared/api/services';
 
 const router = useRouter();
 
+const isSmallLogin = ref(false);
 const isSmallPassword = ref(false);
 const isCorrectPassword = ref(true);
 const isUserExists = ref(false);
@@ -18,8 +19,7 @@ const confirmPassword = ref('');
 
 const handleRegister = async () => {
   isSmallPassword.value = password.value.length < 5;
-
-  if (isSmallPassword.value && login.value) return;
+  isSmallLogin.value = login.value.length < 5;
 
   const isCorrectPasswordHandler = computed(
     () => password.value === confirmPassword.value
@@ -27,16 +27,23 @@ const handleRegister = async () => {
 
   isCorrectPassword.value = isCorrectPasswordHandler.value;
 
-  if (isCorrectPasswordHandler.value) {
+  if (!!isSmallPassword.value || !!isSmallLogin.value || login.value.length < 5)
+    return;
+
+  if (isCorrectPassword.value) {
     try {
       const { token, status } = await registerUser(password.value, login.value);
-      if (token) {
-        console.log('Успешная регистрация. JWT токен:', token);
-      } else {
-        console.error('Не удалось зарегистрироваться. Статус:', status);
-      }
+
       if (status === 403) {
         isUserExists.value = true;
+        return;
+      }
+
+      if (token) {
+        console.log('Успешная регистрация. JWT токен:', token);
+        router.push('/wallet');
+      } else {
+        console.error('Не удалось зарегистрироваться. Статус:', status);
       }
     } catch (error: any) {
       console.error('Ошибка регистрации:', error);
@@ -52,23 +59,27 @@ const handleRegister = async () => {
 <template>
   <div class="h-screen">
     <div
-      class="h-[80%] pt-[35px] mx-[20px] flex flex-col justify-between items-center"
+      class="h-full py-[35px] mx-[20px] flex flex-col justify-between items-center"
     >
       <h1 class="text-[32px] text-[#fff]">Регистрация</h1>
-      <div>
+      <div class="flex flex-col items-center gap-[10px]">
         <img :src="logo" alt="" />
-        <h2 class="text-[#fff] font-bold text-center text-[32px] mt-[10px]">
-          GWallet
-        </h2>
-      </div>
-      <div class="w-full flex flex-col gap-[24px]">
+        <h2 class="text-[#fff] font-bold text-center text-[32px]">GWallet</h2>
         <h4
-          v-if="isUserExists"
-          class="text-red text-[20px] text-center font-bold"
+          :class="`text-red text-[20px] text-center font-bold ${
+            isUserExists ? 'opacity-100' : 'opacity-0'
+          }`"
         >
           Такой пользователь уже существует
         </h4>
-        <InputText class="w-full" placeholder="Логин" v-model="login" />
+      </div>
+      <div class="w-full flex flex-col gap-[24px]">
+        <div>
+          <InputText class="w-full" placeholder="Логин" v-model="login" />
+          <div v-if="isSmallLogin" class="text-red text-[17px]">
+            Логин слишком короткий
+          </div>
+        </div>
         <div>
           <InputText
             :class="`w-full${isCorrectPassword ? '' : ' p-invalid'}`"

@@ -8,6 +8,8 @@ import { loginUser } from '../../../shared/api/services';
 
 const router = useRouter();
 
+const isErrorAuth = ref(false);
+
 const login = ref('');
 const password = ref('');
 
@@ -15,8 +17,14 @@ const handleLogin = async () => {
   try {
     const { token, status } = await loginUser(login.value, password.value);
 
+    if (status === 401 || status === 405 || status === 500) {
+      isErrorAuth.value = true;
+      return;
+    }
+
     if (token) {
       console.log('Успешный вход. JWT токен:', token);
+      router.push('/wallet');
     } else {
       console.error('Не удалось войти. Статус:', status);
     }
@@ -33,14 +41,19 @@ const handleLogin = async () => {
 <template>
   <div class="h-screen">
     <div
-      class="h-[80%] pt-[35px] mx-[20px] flex flex-col justify-between items-center"
+      class="h-full py-[35px] mx-[20px] flex flex-col justify-between items-center"
     >
       <h1 class="text-[32px] text-[#fff]">Авторизация</h1>
-      <div>
+      <div class="flex flex-col items-center gap-[10px]">
         <img :src="logo" alt="" />
-        <h2 class="text-[#fff] font-bold text-center text-[32px] mt-[10px]">
-          GWallet
-        </h2>
+        <h2 class="text-[#fff] font-bold text-center text-[32px]">GWallet</h2>
+        <h4
+          :class="`text-red text-[20px] text-center font-bold ${
+            isErrorAuth ? 'opacity-100' : 'opacity-0'
+          }`"
+        >
+          Неправильный логин или пароль
+        </h4>
       </div>
       <div class="w-full flex flex-col gap-[24px]">
         <InputText class="w-full" placeholder="Логин" v-model="login" />
