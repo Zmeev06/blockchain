@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Input } from '../shared/ui/Input';
-
-const inputValue = ref('');
+import { Auth } from '../pages/Auth';
 </script>
 
 <template>
   <div>
-    <Input placeholder="Логин" :model-value="inputValue" />
-    {{ inputValue }}
+    <Auth />
   </div>
 </template>
 
