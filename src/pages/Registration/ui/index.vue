@@ -8,6 +8,7 @@ import { registerUser } from '../../../shared/api/services';
 
 const router = useRouter();
 
+const isSmallPassword = ref(false);
 const isCorrectPassword = ref(true);
 const isUserExists = ref(false);
 
@@ -16,6 +17,10 @@ const password = ref('');
 const confirmPassword = ref('');
 
 const handleRegister = async () => {
+  isSmallPassword.value = password.value.length < 5;
+
+  if (isSmallPassword.value && login.value) return;
+
   const isCorrectPasswordHandler = computed(
     () => password.value === confirmPassword.value
   );
@@ -30,14 +35,14 @@ const handleRegister = async () => {
       } else {
         console.error('Не удалось зарегистрироваться. Статус:', status);
       }
+      if (status === 403) {
+        isUserExists.value = true;
+      }
     } catch (error: any) {
       console.error('Ошибка регистрации:', error);
 
       if (error instanceof AxiosError && error.response) {
         console.error('Статус ошибки:', error.response.status);
-        if (error.response.status === 403) {
-          isUserExists.value = true;
-        }
       }
     }
   }
@@ -57,6 +62,12 @@ const handleRegister = async () => {
         </h2>
       </div>
       <div class="w-full flex flex-col gap-[24px]">
+        <h4
+          v-if="isUserExists"
+          class="text-red text-[20px] text-center font-bold"
+        >
+          Такой пользователь уже существует
+        </h4>
         <InputText class="w-full" placeholder="Логин" v-model="login" />
         <div>
           <InputText
@@ -65,7 +76,7 @@ const handleRegister = async () => {
             type="password"
             v-model="password"
           />
-          <div v-if="password.length < 5" class="text-red text-[17px]">
+          <div v-if="isSmallPassword" class="text-red text-[17px]">
             Пароль слишком короткий
           </div>
           <div v-if="!isCorrectPassword" class="text-red text-[17px]">
