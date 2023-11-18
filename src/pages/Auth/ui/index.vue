@@ -10,7 +10,7 @@ const password = ref("");
 
 const handleLogin = async () => {
   try {
-    const { token, status } = await loginUser("ваш-логин", "ваш-пароль");
+    const { token, status } = await loginUser(login.value, password.value);
 
     if (token) {
       console.log("Успешный вход. JWT токен:", token);

@@ -13,7 +13,6 @@ const handleRegister = async () => {
   if (password === confirmPassword) {
     try {
       const { token, status } = await registerUser(password.value, login.value);
-
       if (token) {
         console.log("Успешная регистрация. JWT токен:", token);
       } else {
