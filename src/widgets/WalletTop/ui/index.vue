@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { Avatar } from "../../../shared/ui/Avatar";
-import { Menu } from "../../../shared/ui/Menu";
-import { onClickOutside } from "@vueuse/core";
+import { ref } from 'vue';
+import { Avatar } from '../../../shared/ui/Avatar';
+import { Menu } from '../../../shared/ui/Menu';
+import { onClickOutside } from '@vueuse/core';
 
-const name = ref("Sergey_T06");
+const name = ref('Sergey_T06');
 
 const isOpenMenu = ref(false);
 
@@ -15,7 +15,7 @@ onClickOutside(menu, () => (isOpenMenu.value = false));
 <template lang="html">
   <div class="flex w-full justify-between items-center">
     <div class="relative">
-      <Avatar :name="name" @click="isOpenMenu = true"/>
+      <Avatar :name="name" @click="isOpenMenu = true" />
       <Menu
         name="Sergey_T06"
         v-show="isOpenMenu"

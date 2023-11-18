@@ -1,30 +1,36 @@
-import Routing from "./index.vue";
-import { Auth } from "./Auth";
-import { Registration } from "./Registration";
-import { WalletPage } from "./WalletPage";
-import { Settings } from "./Settings";
+import Routing from './index.vue';
+import { Auth } from './Auth';
+import { Registration } from './Registration';
+import { WalletPage } from './WalletPage';
+import { Settings } from './Settings';
+import { Refill } from './Refill';
 
 export const routes = [
-  { path: "/auth", component: Auth, name: "Auth" },
+  { path: '/auth', component: Auth, name: 'Auth' },
   {
-    path: "/registration",
+    path: '/registration',
     component: Registration,
-    name: "Registration",
+    name: 'Registration',
   },
   {
-    path: "/wallet",
+    path: '/wallet',
     component: WalletPage,
-    name: "Wallet",
+    name: 'Wallet',
   },
   {
-    path: "/settings",
+    path: '/settings',
     component: Settings,
-    name: "Settings",
+    name: 'Settings',
+  },
+  {
+    path: '/refill',
+    component: Refill,
+    name: 'Refill',
   },
   {
     path: '/:pathMatch(.*)',
-    redirect: '/auth'
-  }
+    redirect: '/auth',
+  },
 ];
 
 export { Routing };
