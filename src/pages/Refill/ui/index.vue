@@ -5,12 +5,14 @@ import InputText from 'primevue/inputtext';
 import { useRouter } from 'vue-router';
 import arrow from '../../../shared/assets/icons/arrow.svg';
 import coin from '../../../shared/assets/img/coin.svg';
+import send from '../../../shared/assets/img/send.svg';
+import cancel from '../../../shared/assets/img/cancel.svg';
 
-const balance = ref('3000');
 const router = useRouter();
 
+const balance = ref('3000');
+
 const login = ref('Sergey_T06');
-const publicKey = ref('a4F12_ggE$3kl_!ddsa564.fglve86tivy7buoin...');
 const pasport = ref('');
 const inn = ref('');
 </script>
@@ -46,17 +48,15 @@ const inn = ref('');
         <InputText class="w-full" placeholder="Паспорт" v-model="pasport" />
         <InputText class="w-full" placeholder="Инн" v-model="inn" />
       </div>
-      <div class="w-full">
-        <button
-          class="mb-[25px] w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
-        >
-          Сохранить
-        </button>
-        <button
-          class="w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-red py-[8px] text-red text-[16px] font-medium uppercase tracking-[1px]"
-        >
-          Отменить
-        </button>
+      <div class="w-full flex justify-between items-center">
+        <div @click="router.push('/refill')" class="flex flex-col items-center">
+          <img :src="send" class="w-[70px] h-[70px]" />
+          <p class="text-white font-light">Перевести</p>
+        </div>
+        <div @click="router.push('/refill')" class="flex flex-col items-center">
+          <img :src="cancel" class="w-[70px] h-[70px]" />
+          <p class="text-red font-light">Отменить</p>
+        </div>
       </div>
     </div>
   </div>
