@@ -1,27 +1,30 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import InputText from "primevue/inputtext";
-import logo from "../../../shared/assets/icons/logo.svg";
-import { loginUser } from "../../../shared/api/services";
-import { AxiosError } from "axios";
+import { ref } from 'vue';
+import { AxiosError } from 'axios';
+import { useRouter } from 'vue-router';
+import InputText from 'primevue/inputtext';
+import logo from '../../../shared/assets/icons/logo.svg';
+import { loginUser } from '../../../shared/api/services';
 
-const login = ref("");
-const password = ref("");
+const router = useRouter();
+
+const login = ref('');
+const password = ref('');
 
 const handleLogin = async () => {
   try {
     const { token, status } = await loginUser(login.value, password.value);
 
     if (token) {
-      console.log("Успешный вход. JWT токен:", token);
+      console.log('Успешный вход. JWT токен:', token);
     } else {
-      console.error("Не удалось войти. Статус:", status);
+      console.error('Не удалось войти. Статус:', status);
     }
   } catch (error: any) {
-    console.error("Ошибка входа:", error);
+    console.error('Ошибка входа:', error);
 
     if (error instanceof AxiosError && error.response) {
-      console.error("Статус ошибки:", error.response.status);
+      console.error('Статус ошибки:', error.response.status);
     }
   }
 };
@@ -49,11 +52,12 @@ const handleLogin = async () => {
         />
         <div class="text-[#fff] text-[17px]">
           Нет аккаунта?
-          <a
-            href="/registration"
+          <span
+            @click="() => router.push('/registration')"
             class="text-blue font-medium text-[17px] ml-[5px] py-[4px] px-[10px] rounded-[5px] bg-[#fff]"
-            >Зарегистрироваться</a
           >
+            Зарегистрироваться
+          </span>
         </div>
       </div>
       <button

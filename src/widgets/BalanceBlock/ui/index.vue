@@ -4,6 +4,7 @@ import coin from '../../../shared/assets/img/coin.svg';
 
 const balance = ref('3000');
 </script>
+
 <template>
   <div
     class="bg-white w-full px-[12px] pt-[8px] rounded-[5px] mt-[30px] pb-[20px]"
@@ -19,4 +20,3 @@ const balance = ref('3000');
     </div>
   </div>
 </template>
-<style lang="scss"></style>

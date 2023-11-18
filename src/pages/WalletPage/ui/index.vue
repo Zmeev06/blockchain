@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { WalletTop } from "../../../widgets/WalletTop";
-import { BalanceBlock } from "../../../widgets/BalanceBlock";
-import { WalletBtns } from "../../../widgets/WalletBtns";
-import { History } from "../../../widgets/History";
+import { WalletTop } from '../../../widgets/WalletTop';
+import { BalanceBlock } from '../../../widgets/BalanceBlock';
+import { WalletBtns } from '../../../widgets/WalletBtns';
+import { History } from '../../../widgets/History';
 </script>
+
 <template lang="html">
   <div class="flex flex-col justify-between">
     <div class="pt-[18px] px-[16px]">
@@ -11,7 +12,6 @@ import { History } from "../../../widgets/History";
       <BalanceBlock />
       <WalletBtns />
     </div>
-    <History/>
+    <History />
   </div>
 </template>
-<style lang="scss"></style>

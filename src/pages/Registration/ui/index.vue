@@ -1,28 +1,43 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import InputText from "primevue/inputtext";
-import logo from "../../../shared/assets/icons/logo.svg";
-import { registerUser } from "../../../shared/api/services";
-import { AxiosError } from "axios";
+import { ref, computed } from 'vue';
+import { AxiosError } from 'axios';
+import { useRouter } from 'vue-router';
+import InputText from 'primevue/inputtext';
+import logo from '../../../shared/assets/icons/logo.svg';
+import { registerUser } from '../../../shared/api/services';
 
-const login = ref("");
-const password = ref("");
-const confirmPassword = ref("");
+const router = useRouter();
+
+const isCorrectPassword = ref(true);
+const isUserExists = ref(false);
+
+const login = ref('');
+const password = ref('');
+const confirmPassword = ref('');
 
 const handleRegister = async () => {
-  if (password === confirmPassword) {
+  const isCorrectPasswordHandler = computed(
+    () => password.value === confirmPassword.value
+  );
+
+  isCorrectPassword.value = isCorrectPasswordHandler.value;
+
+  if (isCorrectPasswordHandler.value) {
     try {
       const { token, status } = await registerUser(password.value, login.value);
       if (token) {
-        console.log("Успешная регистрация. JWT токен:", token);
+        console.log('Успешная регистрация. JWT токен:', token);
       } else {
-        console.error("Не удалось зарегистрироваться. Статус:", status);
+        console.error('Не удалось зарегистрироваться. Статус:', status);
       }
     } catch (error: any) {
-      console.error("Ошибка регистрации:", error);
+      console.error('Ошибка регистрации:', error);
 
       if (error instanceof AxiosError && error.response) {
-        console.error("Статус ошибки:", error.response.status);
+        console.error('Статус ошибки:', error.response.status);
+        if (error.response.status === 403) {
+          isUserExists.value = true;
+        }
       }
     }
   }
@@ -43,19 +58,39 @@ const handleRegister = async () => {
       </div>
       <div class="w-full flex flex-col gap-[24px]">
         <InputText class="w-full" placeholder="Логин" v-model="login" />
-        <InputText class="w-full" placeholder="Пароль" v-model="password" />
-        <InputText
-          class="w-full"
-          placeholder="Повторите пароль"
-          v-model="confirmPassword"
-        />
+        <div>
+          <InputText
+            :class="`w-full${isCorrectPassword ? '' : ' p-invalid'}`"
+            placeholder="Пароль"
+            type="password"
+            v-model="password"
+          />
+          <div v-if="password.length < 5" class="text-red text-[17px]">
+            Пароль слишком короткий
+          </div>
+          <div v-if="!isCorrectPassword" class="text-red text-[17px]">
+            Пароли не совпадают
+          </div>
+        </div>
+        <div>
+          <InputText
+            :class="`w-full${isCorrectPassword ? '' : ' p-invalid'}`"
+            placeholder="Повторите пароль"
+            type="password"
+            v-model="confirmPassword"
+          />
+          <div v-if="!isCorrectPassword" class="text-red text-[17px]">
+            Пароли не совпадают
+          </div>
+        </div>
         <div class="text-[#fff] text-[17px]">
           Уже есть аккаунт?
-          <a
-            href="/"
+          <span
+            @click="() => router.push('/auth')"
             class="text-blue font-medium text-[17px] ml-[5px] py-[4px] px-[10px] rounded-[5px] bg-[#fff]"
-            >Войти</a
           >
+            Войти
+          </span>
         </div>
       </div>
       <button
