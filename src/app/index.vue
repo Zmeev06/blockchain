@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Auth } from '../pages/Auth';
+import { WalletPage } from "../pages/WalletPage";
 </script>
 
 <template>
   <div>
-    <Auth />
+    <WalletPage />
   </div>
 </template>
 
 <style lang="scss">
-@import url('./style.scss');
+@import url("./style.scss");
 </style>

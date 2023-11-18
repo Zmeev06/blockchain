@@ -125,13 +125,9 @@ img {
 
 body {
   overflow-x: hidden;
-}
-
-@font-face {
-  font-family: Inter;
-  src: url("/fonts/Inter-Regular.otf");
+  background-color: #0086d1;
 }
 
 * {
-  font-family: Inter;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
