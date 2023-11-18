@@ -32,7 +32,7 @@ const password = ref('');
         </div>
       </div>
       <button
-        class="w-full rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
+        class="w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
       >
         Авторизироваться
       </button>

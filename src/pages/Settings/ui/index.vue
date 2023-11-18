@@ -17,7 +17,9 @@ const inn = ref('');
         <h1 class="text-[24px] text-center text-[#fff]">Настройки</h1>
         <h3 class="text-[20px] text-center text-grey">{{ login }}</h3>
       </div>
-      <div class="w-full flex flex-col gap-[18px]">
+      <div
+        class="w-full hover:bg-[#fff] hover:text-[#000] flex flex-col gap-[18px]"
+      >
         <InputText
           class="w-full"
           placeholder="Логин"
@@ -35,12 +37,12 @@ const inn = ref('');
       </div>
       <div class="w-full">
         <button
-          class="mb-[25px] w-full rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
+          class="mb-[25px] w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-[#fff] py-[8px] text-[#fff] text-[16px] font-medium uppercase tracking-[1px]"
         >
           Сохранить
         </button>
         <button
-          class="w-full rounded-[3px] border-[2px] border-red py-[8px] text-red text-[16px] font-medium uppercase tracking-[1px]"
+          class="w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-red py-[8px] text-red text-[16px] font-medium uppercase tracking-[1px]"
         >
           Отменить
         </button>
