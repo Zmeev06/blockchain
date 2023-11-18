@@ -5,7 +5,7 @@ import { WalletPage } from "./WalletPage";
 import { Settings } from "./Settings";
 
 export const routes = [
-  { path: "/", component: Auth, name: "Auth" },
+  { path: "/auth", component: Auth, name: "Auth" },
   {
     path: "/registration",
     component: Registration,
@@ -21,6 +21,10 @@ export const routes = [
     component: Settings,
     name: "Settings",
   },
+  {
+    path: '/:pathMatch(.*)',
+    redirect: '/auth'
+  }
 ];
 
 export { Routing };
