@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface AvatarProps {
-  name: string;
+  name?: string;
 }
 
 const props = defineProps<AvatarProps>();
@@ -10,7 +10,7 @@ const props = defineProps<AvatarProps>();
     class="rounded-full bg-white flex justify-center items-center w-[40px] h-[40px]"
   >
     <p class="text-dark text-[16px]">
-      {{ props.name.split("")[0] }}
+      {{ props.name?.split("")[0] }}
     </p>
   </div>
 </template>

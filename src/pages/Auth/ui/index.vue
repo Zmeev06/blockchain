@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import {  ref } from 'vue';
-import { AxiosError } from 'axios';
-import { useRouter } from 'vue-router';
-import InputText from 'primevue/inputtext';
-import logo from '../../../shared/assets/icons/logo.svg';
-import { loginUser } from '../../../shared/api/services';
+import { ref, onMounted } from "vue";
+import { AxiosError } from "axios";
+import { useRouter } from "vue-router";
+import InputText from "primevue/inputtext";
+import logo from "../../../shared/assets/icons/logo.svg";
+import { loginUser } from "../../../shared/api/services";
+import { useUserStore } from "../../../shared/store/userStore";
 
 const router = useRouter();
 
 const isErrorAuth = ref(false);
 
-const login = ref('');
-const password = ref('');
+const login = ref("");
+const password = ref("");
+const user = useUserStore();
 
+onMounted(() => {
+  user.getUserData();
+
+  if (user.value?.login !== '') {
+    // router.push('wallet')
+  }
+});
 
 const handleLogin = async () => {
   try {
@@ -24,15 +33,15 @@ const handleLogin = async () => {
     }
 
     if (token) {
-      router.push('/wallet');
+      router.push("/wallet");
     } else {
-      console.error('Не удалось войти. Статус:', status);
+      console.error("Не удалось войти. Статус:", status);
     }
   } catch (error: any) {
-    console.error('Ошибка входа:', error);
+    console.error("Ошибка входа:", error);
 
     if (error instanceof AxiosError && error.response) {
-      console.error('Статус ошибки:', error.response.status);
+      console.error("Статус ошибки:", error.response.status);
     }
   }
 };

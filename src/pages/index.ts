@@ -28,6 +28,11 @@ export const routes = [
     name: 'Refill',
   },
   {
+    path: '/refill/:user',
+    component: Refill,
+    name: 'RefillUser',
+  },
+  {
     path: '/:pathMatch(.*)',
     redirect: '/auth',
   },

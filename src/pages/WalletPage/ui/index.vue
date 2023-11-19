@@ -3,25 +3,31 @@ import { WalletTop } from "../../../widgets/WalletTop";
 import { BalanceBlock } from "../../../widgets/BalanceBlock";
 import { WalletBtns } from "../../../widgets/WalletBtns";
 import { History } from "../../../widgets/History";
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { ErrorModal } from "../../../shared/ui/ErrorModal";
-import { onClickOutside } from '@vueuse/core';
-import { useModalStore } from '../../../shared/store/modalStore/index';
+import { onClickOutside } from "@vueuse/core";
+import { useModalStore } from "../../../shared/store/modalStore";
+import { useUserStore } from "../../../shared/store/userStore";
 
 const router = useRouter();
+const user = useUserStore();
+const name = ref();
 onMounted(() => {
+  user.getUserData();
   if (!localStorage.getItem("jwtToken")) {
     router.push("auth");
+  } else if (user.value?.login !== '') {
+    name.value = user.value?.login;
   }
 });
 
-const isOpenModal = useModalStore()
-const modal = ref(null)
+const isOpenModal = useModalStore();
+const modal = ref(null);
 
 onClickOutside(modal, () => {
-  console.log('test');
-  isOpenModal.closeModal()})
+  isOpenModal.closeModal();
+});
 </script>
 
 <template lang="html">
@@ -32,6 +38,6 @@ onClickOutside(modal, () => {
       <WalletBtns />
     </div>
     <History />
-    <ErrorModal ref="modal"/>
+    <ErrorModal ref="modal" />
   </div>
 </template>
