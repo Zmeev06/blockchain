@@ -1,20 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import InlineSvg from 'vue-inline-svg';
-import InputText from 'primevue/inputtext';
-import { useRouter } from 'vue-router';
-import arrow from '../../../shared/assets/icons/arrow.svg';
-import coin from '../../../shared/assets/img/coin.svg';
-import send from '../../../shared/assets/img/send.svg';
-import cancel from '../../../shared/assets/img/cancel.svg';
+import { ref, onMounted } from "vue";
+import InlineSvg from "vue-inline-svg";
+import InputText from "primevue/inputtext";
+import { useRouter } from "vue-router";
+import arrow from "../../../shared/assets/icons/arrow.svg";
+import coin from "../../../shared/assets/img/coin.svg";
+import send from "../../../shared/assets/img/send.svg";
+import cancel from "../../../shared/assets/img/cancel.svg";
 
 const router = useRouter();
 
-const balance = ref('3000');
+const balance = ref("3000");
 
-const login = ref('Sergey_T06');
-const pasport = ref('');
-const inn = ref('');
+const recipient = ref("");
+const sum = ref("");
+const login = ref('Sergey_T06')
+
+onMounted(() => {
+  if (!localStorage.getItem("jwtToken")) {
+    router.push("auth");
+  }
+});
 </script>
 
 <template>
@@ -45,15 +51,19 @@ const inn = ref('');
             </div>
           </div>
         </div>
-        <InputText class="w-full" placeholder="Паспорт" v-model="pasport" />
-        <InputText class="w-full" placeholder="Инн" v-model="inn" />
+        <InputText
+          class="w-full"
+          placeholder="Получатель"
+          v-model="recipient"
+        />
+        <InputText class="w-full" placeholder="Сумма перевода" v-model="sum" />
       </div>
       <div class="w-full flex justify-between items-center">
         <div @click="router.push('/refill')" class="flex flex-col items-center">
           <img :src="send" class="w-[70px] h-[70px]" />
           <p class="text-white font-light">Перевести</p>
         </div>
-        <div @click="router.push('/refill')" class="flex flex-col items-center">
+        <div @click="router.push('/wallet')" class="flex flex-col items-center">
           <img :src="cancel" class="w-[70px] h-[70px]" />
           <p class="text-red font-light">Отменить</p>
         </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import {  ref } from 'vue';
 import { AxiosError } from 'axios';
 import { useRouter } from 'vue-router';
 import InputText from 'primevue/inputtext';
@@ -13,6 +13,7 @@ const isErrorAuth = ref(false);
 const login = ref('');
 const password = ref('');
 
+
 const handleLogin = async () => {
   try {
     const { token, status } = await loginUser(login.value, password.value);
@@ -23,7 +24,6 @@ const handleLogin = async () => {
     }
 
     if (token) {
-      console.log('Успешный вход. JWT токен:', token);
       router.push('/wallet');
     } else {
       console.error('Не удалось войти. Статус:', status);

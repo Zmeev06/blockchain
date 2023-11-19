@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import InlineSvg from 'vue-inline-svg';
 import InputText from 'primevue/inputtext';
 import { useRouter } from 'vue-router';
@@ -11,6 +11,12 @@ const login = ref('Sergey_T06');
 const publicKey = ref('a4F12_ggE$3kl_!ddsa564.fglve86tivy7buoin...');
 const pasport = ref('');
 const inn = ref('');
+
+onMounted(() => {
+  if (!localStorage.getItem("jwtToken")) {
+    router.push("auth");
+  }
+});
 </script>
 
 <template>
@@ -28,7 +34,7 @@ const inn = ref('');
         <h3 class="text-[20px] text-center text-grey">{{ login }}</h3>
       </div>
       <div
-        class="w-full hover:bg-[#fff] hover:text-[#000] flex flex-col gap-[18px]"
+        class="w-full hover:text-[#000] flex flex-col gap-[18px]"
       >
         <InputText
           class="w-full"
@@ -52,7 +58,7 @@ const inn = ref('');
           Сохранить
         </button>
         <button
-          class="w-full hover:bg-[#fff] hover:text-[#000] rounded-[3px] border-[2px] border-red py-[8px] text-red text-[16px] font-medium uppercase tracking-[1px]"
+          class="w-full hover:bg-red hover:text-white rounded-[3px] border-[2px] border-red py-[8px] text-red text-[16px] font-medium uppercase tracking-[1px]"
         >
           Отменить
         </button>
