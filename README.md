@@ -1,18 +1,31 @@
-# Vue 3 + TypeScript + Vite
+# GWallet - Кошелек для криптовалюты GCoin
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## О приложении
 
-## Recommended IDE Setup
+GWallet - это удобное и безопасное приложение кошелька для управления вашими криптовалютами, основанное на собственной блокчейн системе GCoin. Приложение предоставляет простой и интуитивно понятный интерфейс для хранения, отправки и получения GCoin, а также просмотра истории транзакций.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Функциональность
 
-## Type Support For `.vue` Imports in TS
+- **Хранение GCoin:** Безопасное и надежное хранение ваших криптовалют.
+- **Отправка и получение:** Простая отправка и получение GCoin.
+- **История транзакций:** Просмотр полной истории транзакций.
+- **Своя блокчейн система:** Реализована собственная блокчейн система GCoin для повышения безопасности и эффективности транзакций.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Технологии
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- **Vue 3:** Используется для построения пользовательского интерфейса.
+- **Vite:** Быстрый сборщик для разработки приложений на основе JavaScript и TypeScript.
+- **FSD архитектура:** Обеспечивает модульность и масштабируемость приложения.
+- **Tailwind CSS:** Используется для стилизации пользовательского интерфейса с минимальным количеством CSS кода.
+- **TypeScript:** Повышает читаемость кода, обеспечивает статическую типизацию.
+- **Pinia:** Используется для управления состоянием приложения.
+- **GoLang:** Бэкенд написан на языке программирования GoLang.
+- **Fiber:** Веб-фреймворк на GoLang для построения быстрых и эффективных веб-приложений.
+- **RSA шифрование:** Обеспечивает безопасность взаимодействия между клиентом и сервером.
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Запуск проекта
+
+1. Клонируйте репозиторий: `git clone https://github.com/Zmeev06/blockchain/tree/dev`
+2. Перейдите в директорию проекта: `cd blockchain`
+3. Установите зависимости: `npm install` (или `yarn install`)
+4. Запустите проект: `npm run dev` (или `yarn dev`)
